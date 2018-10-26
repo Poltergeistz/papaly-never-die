@@ -28,7 +28,7 @@
             value=""
             no-resize
           ></v-textarea>
-          <p class=".font-italic .caption">Max char 100</p>
+          <p class="font-italic caption">Max char 100</p>
           </v-card-text>
   
           <v-divider></v-divider>
