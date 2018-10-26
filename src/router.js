@@ -9,6 +9,16 @@ export default new Router({
       path: "/",
       name: "board",
       component: () => import("./views/Board.vue")
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("./views/Login.vue")
+    },
+    {
+      path: "/signin",
+      name: "signin",
+      component: () => import("./views/Signin.vue")
     }
   ]
 });
