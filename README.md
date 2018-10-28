@@ -71,3 +71,18 @@ npm run test
 ```
 npm run lint
 ```
+
+### Firebase backend
+Create a firebaseConfig.js file and populate it with the firebase creds
+/!\ Remember to not push this file
+
+```
+export default {
+    apiKey: <API KEY>,
+    authDomain: <AUTH DOMAIN>,
+    databaseURL: <DATABASE URL>,
+    projectId: <PROJECT ID>,
+    storageBucket: <STORAGE BUCKET>,
+    messagingSenderId: <MESSAGING SENDER ID>
+}
+```
