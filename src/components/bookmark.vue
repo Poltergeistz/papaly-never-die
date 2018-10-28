@@ -80,7 +80,6 @@
 </template>
 <script>
 //import db from '../firebaseinit.js'
-import Modal from '../components/Modal'
 import AddCategoryModal from '../components/AddCategoryModal'
 import EditCategoryModal from '../components/EditCategoryModal'
 import AddLinkModal from '../components/AddLinkModal'
@@ -88,7 +87,6 @@ import EditLinkModal from '../components/EditLinkModal'
 import db from '../firebaseinit.js'
     export default {
       components: {
-        Modal,
         AddCategoryModal,
         AddLinkModal,
         EditCategoryModal,
