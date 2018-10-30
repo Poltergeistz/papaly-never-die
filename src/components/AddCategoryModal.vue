@@ -50,6 +50,7 @@ export default {
       db.collection('category').add({
         category_name: this.category_name
       }).then((docRef) => {console.log(`Document written with ID: ${docRef.id}`)})
+      .catch(err => console.log(err))
       this.categories.push(this.category_name)
       this.dialog_add_categories = false
     }

@@ -8,10 +8,9 @@
     <!-- Categories -->
     <v-flex xs12 sm6 md4>
     <v-card>
-      <v-toolbar
+      <v-toolbar v-for="category in categories" v-bind:key="category.id"
         class="headline blue lighten-5 elevation-0"
-        primary-title>
-        {{category_name}}
+        primary-title>{{category.category_name}}
         <v-spacer></v-spacer>
         <!-- menu -->
         <v-menu :nudge-width="100"> 
@@ -33,42 +32,12 @@
       grid-list-md
       >
       <!-- Links -->
-      <v-card wrap sx6 md6 md4>
-        <!-- v-for="(bookmark, index) in bookmarks" v-bind:key="index" -->
+      <v-card v-for="link in links" v-bind:key="link.id" wrap sx6 md6 md4>
         <v-card color="blue lighten-4" sx6 md6 md4>
-          <EditLinkModal/>
-          <a class="card-title">{{link_url}}</a>
+          <a :href="link.link_url" class="card-title"><EditLinkModal/>{{link.link_url}}</a>
         </v-card>
       </v-card>
-      </v-container>
-    <!-- New categories -->  
-    <v-card wrap sx6 md6 md4>
-      <!-- v-for="(category, index) in categories" v-bind:key="index" -->
-      <v-toolbar
-        class="headline blue lighten-5 elevation-0"
-        primary-title>{{category_name}}
-        
-        <v-spacer></v-spacer>
-        <!-- menu -->
-        <v-menu :nudge-width="100"> 
-            <v-btn slot="activator" icon>
-        <v-icon>more_vert</v-icon>
-            </v-btn>
-  
-          <v-list>
-            <v-list-tile>
-              <AddLinkModal/>
-              <EditCategoryModal/>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
-        <!-- menu end -->
-      </v-toolbar>
-        <v-container
-      fluid
-      grid-list-md></v-container>
-    </v-card>
-    <!-- Category card end -->  
+      </v-container> 
     </v-card>
     </v-flex>
     <!-- Board end -->
@@ -96,31 +65,44 @@ import db from '../firebaseinit.js'
              category_name: null,
              link_name: null,
              link_url: null,
-             link_desc: null
+             link_desc: null,
+             links: [],
+             categories: []
             }
             },
         watch: {
           
         },
-        methods: {
-          fetchCategories(){
+        created() {
           // Fetch all categories
           db.collection('category').get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
-              this.category_name = doc.data().category_name
+              console.log(doc.data().category_name)
+              const data = {
+                'id': doc.id,
+                'category_name': doc.data().category_name
+              }
+              this.categories.push(data)
+              
             })
-          })
-          },
-          fetchLinks(){
+          }).catch(err => console.log(err))
+          
           // Fetch all links
           db.collection('link').get().then(querySnapshot => {
             querySnapshot.forEach(doc => {
-              this.link_url = doc.data().link_url
+              console.log(doc.data().link_url)
+              const data = {
+                'id': doc.id,
+                'link_url': doc.data().link_url,
+                'link_name': doc.data().link_name,
+                'link_desc': doc.data().link_desc
+              }
+              this.links.push(data)
             })
-          })
-        }
+          }).catch(err => console.log(err))
         }
 }
+
 </script>
 <style>
 

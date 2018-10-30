@@ -86,3 +86,19 @@ export default {
     messagingSenderId: <MESSAGING SENDER ID>
 }
 ```
+
+### Firestore setup 
+
+Make sure you are in test mode to allow interaction with the database
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write;
+    }
+  }
+}
+```
+
+You can switch mode at any moment in your database > Rules

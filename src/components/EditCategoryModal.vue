@@ -44,25 +44,24 @@ export default {
   data(){
     return{
       dialog_edit_category: false,
-      // categories: [],
+      categories: [],
       category_name: null
     }
   },
+  created(){
+    // Fetch all categories
+    /* db.collection('category').where('id', '==', docRef.id).get()
+    .then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+      const data = {
+        'id': doc.id,
+        'category_name': doc.data().category_name
+      }
+      this.categories.push(data)
+      })
+    }) */
+  },
   methods:{
-    fetchData(index){
-      // Fetch all categories
-          db.collection('category').where('category_id', '==', index).get()
-          .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-                this.category_name = doc.data().category_name
-            })
-          })
-    },
-    /* editCategory(){
-      this.category_name = event.target.value
-      this.$emit('categoryChanged', this.category_name)
-      this.dialog_edit_category = false
-    }, */
     removeCategory(index){
       // Confirm delete
       if(confirm('Are you sure ?')){
@@ -73,7 +72,6 @@ export default {
         })
       })
     }
-    // this.categories.splice(index, 1)
     this.dialog_edit_category = false
       },
     updateCategory(index){

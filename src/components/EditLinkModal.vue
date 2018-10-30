@@ -61,21 +61,25 @@ export default {
       link_name: null,
       link_url: null,
       link_desc: null,
-      // bookmarks: []
+      links: []
     }
   },
-  methods: {
-  fetchData(index){
+  created(){
     // Fetch all categories
-    db.collection('link').where('link_id', '==', index).get()
+    /* db.collection('link').where('link_id', '==', index).get()
     .then(querySnapshot => {
-    querySnapshot.forEach(doc => {
-      this.link_name = doc.data().link_name
-      this.link_url = doc.data().link_url
-      this.link_desc = doc.data().link_desc
+      querySnapshot.forEach(doc => {
+        const data = {
+          'id': doc.id,
+          'link_name': doc.data().link_name,
+          'link_url': doc.data().link_url,
+          'link_desc': doc.data().link_desc
+        }
+        this.links.push(data)
       })
-      })
-    },
+    }) */
+  },
+  methods: {
   deleteLink(index) {
     // Confirm delete
     if(confirm('Are you sure ?')){
@@ -86,14 +90,8 @@ export default {
         })
       })
     }
-    /* this.bookmarks.splice(index, 1) */
     this.dialog_edit_link = false
           },
-  /* editLink(event) {
-    this.bookmarks = event.target.value
-    this.$emit('linkChanged', this.link_name)
-    this.dialog_edit_link = false
-          }, */
   updateLink(index){
     // Fetch data
       db.collection('link').where('link_id', '==', index).get()
